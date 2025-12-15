@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold & Silver Rates | Digital Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Digital Dashboard</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="booking.html" class="nav-link"><i class="fas fa-ticket-alt"></i> Bookings</a></li>
+                <li><a href="rates.html" class="nav-link active"><i class="fas fa-coins"></i> Gold & Silver</a></li>
+                <li><a href="currency.html" class="nav-link"><i class="fas fa-exchange-alt"></i> Currency</a></li>
+                <li><a href="weather.html" class="nav-link"><i class="fas fa-cloud-sun"></i> Weather</a></li>
+            </ul>
+            <div class="nav-user">
+                <i class="fas fa-user-circle"></i>
+                <span>Student</span>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Rates Page Content -->
+    <main class="rates-page">
+        <div class="page-header">
+            <h1>Gold & Silver Rates</h1>
+            <p>Live market rates updated every 12 hours</p>
+        </div>
+
+        <div class="rates-container">
+            <!-- Gold Rates Card -->
+            <div class="rate-card gold animate-slide-up">
+                <div class="rate-card-header">
+                    <div class="rate-card-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div>
+                        <h2>Gold (24K)</h2>
+                        <p>Per gram in Indian Rupees</p>
+                    </div>
+                </div>
+                <div class="rate-card-body">
+                    <div class="current-rate gold-rate">₹6,250 / gram</div>
+                    <div class="rate-change positive">+0.8%</div>
+                </div>
+                <div class="rate-card-footer">
+                    <span>Last updated: 12:00 PM</span>
+                    <span>Next update: <span id="goldUpdateCountdown">11:45:32</span></span>
+                </div>
+            </div>
+
+            <!-- Silver Rates Card -->
+            <div class="rate-card silver animate-slide-up">
+                <div class="rate-card-header">
+                    <div class="rate-card-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div>
+                        <h2>Silver</h2>
+                        <p>Per gram in Indian Rupees</p>
+                    </div>
+                </div>
+                <div class="rate-card-body">
+                    <div class="current-rate silver-rate">₹78.5 / gram</div>
+                    <div class="rate-change negative">-0.3%</div>
+                </div>
+                <div class="rate-card-footer">
+                    <span>Last updated: 12:00 PM</span>
+                    <span>Next update: <span id="silverUpdateCountdown">11:45:32</span></span>
+                </div>
+            </div>
+
+            <!-- Rate History Chart -->
+            <div class="rate-history-chart animate-slide-up">
+                <h2>Price Trends (2023)</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; height: 300px;">
+                    <div>
+                        <canvas id="goldChart"></canvas>
+                    </div>
+                    <div>
+                        <canvas id="silverChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Market Information -->
+        <div class="widget animate-slide-up" style="margin-top: 30px;">
+            <div class="widget-header">
+                <h2><i class="fas fa-info-circle"></i> Market Information</h2>
+            </div>
+            <div class="widget-content">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div class="market-info">
+                        <h3><i class="fas fa-chart-line"></i> Gold Today</h3>
+                        <p>Gold prices have shown a positive trend today, increasing by 0.8% from yesterday's closing rate. The demand for gold remains strong in the international market.</p>
+                        <ul>
+                            <li><strong>Opening Rate:</strong> ₹6,210 / gram</li>
+                            <li><strong>Highest Today:</strong> ₹6,270 / gram</li>
+                            <li><strong>Lowest Today:</strong> ₹6,190 / gram</li>
+                        </ul>
+                    </div>
+                    <div class="market-info">
+                        <h3><i class="fas fa-chart-line"></i> Silver Today</h3>
+                        <p>Silver prices have decreased slightly by 0.3% today. The industrial demand for silver continues to support prices despite temporary fluctuations.</p>
+                        <ul>
+                            <li><strong>Opening Rate:</strong> ₹78.8 / gram</li>
+                            <li><strong>Highest Today:</strong> ₹79.2 / gram</li>
+                            <li><strong>Lowest Today:</strong> ₹78.3 / gram</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Digital Dashboard</span>
+            </div>
+            <p class="footer-text">College Project - Interactive Digital Dashboard with Real-time Data Visualization</p>
+            <p class="footer-copyright">© 2025 Digital Dashboard | Created by SK Creations</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Update countdown for rates page
+        function updateRatesCountdown() {
+            const now = new Date();
+            let nextUpdate = new Date(now);
+            
+            if (now.getHours() < 12) {
+                nextUpdate.setHours(12, 0, 0, 0);
+            } else {
+                nextUpdate.setDate(nextUpdate.getDate() + 1);
+                nextUpdate.setHours(0, 0, 0, 0);
+            }
+            
+            const diff = nextUpdate - now;
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            const countdownText = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            const goldCountdown = document.getElementById('goldUpdateCountdown');
+            const silverCountdown = document.getElementById('silverUpdateCountdown');
+            
+            if (goldCountdown) goldCountdown.textContent = countdownText;
+            if (silverCountdown) silverCountdown.textContent = countdownText;
+        }
+        
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            updateRatesCountdown();
+            setInterval(updateRatesCountdown, 1000);
+        });
+    </script>
+</body>
+</html>

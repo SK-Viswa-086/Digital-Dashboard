@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast | Digital Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Digital Dashboard</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="booking.html" class="nav-link"><i class="fas fa-ticket-alt"></i> Bookings</a></li>
+                <li><a href="rates.html" class="nav-link"><i class="fas fa-coins"></i> Gold & Silver</a></li>
+                <li><a href="currency.html" class="nav-link"><i class="fas fa-exchange-alt"></i> Currency</a></li>
+                <li><a href="weather.html" class="nav-link active"><i class="fas fa-cloud-sun"></i> Weather</a></li>
+            </ul>
+            <div class="nav-user">
+                <i class="fas fa-user-circle"></i>
+                <span>Student</span>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Weather Page Content -->
+    <main class="weather-page">
+        <div class="page-header">
+            <h1>Weather Forecast</h1>
+            <p>Get real-time weather updates for cities worldwide</p>
+        </div>
+
+        <!-- Weather Search -->
+        <div class="weather-search animate-slide-up">
+            <h2>Search Weather</h2>
+            <div class="search-container">
+                <select id="citySelect">
+                    <option value="">Select a city...</option>
+                    <option value="New Delhi" selected>New Delhi, India</option>
+                    <option value="Mumbai">Mumbai, India</option>
+                    <option value="Bangalore">Bangalore, India</option>
+                    <option value="Chennai">Chennai, India</option>
+                    <option value="Kolkata">Kolkata, India</option>
+                    <option value="London">London, UK</option>
+                    <option value="New York">New York, USA</option>
+                    <option value="Tokyo">Tokyo, Japan</option>
+                    <option value="Sydney">Sydney, Australia</option>
+                    <option value="Paris">Paris, France</option>
+                </select>
+                <input type="text" id="searchCity" placeholder="Or enter city name...">
+                <button class="btn-search-weather" id="searchWeather">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </div>
+        </div>
+
+        <!-- Current Weather -->
+        <div class="weather-details-container animate-slide-up">
+            <!-- Content will be loaded by JavaScript -->
+        </div>
+
+        <!-- Weather Forecast -->
+        <div class="weather-forecast animate-slide-up">
+            <!-- Content will be loaded by JavaScript -->
+        </div>
+
+        <!-- Weather Information -->
+        <div class="widget animate-slide-up" style="margin-top: 30px;">
+            <div class="widget-header">
+                <h2><i class="fas fa-info-circle"></i> Weather Information</h2>
+            </div>
+            <div class="widget-content">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div class="weather-info">
+                        <h3><i class="fas fa-temperature-high"></i> Temperature</h3>
+                        <p>Temperature is a measure of how hot or cold something is. It is measured using a thermometer and reported in degrees Celsius (°C) or Fahrenheit (°F).</p>
+                        <ul>
+                            <li><strong>Freezing:</strong> 0°C / 32°F</li>
+                            <li><strong>Comfortable:</strong> 20-25°C / 68-77°F</li>
+                            <li><strong>Hot:</strong> Above 30°C / 86°F</li>
+                        </ul>
+                    </div>
+                    <div class="weather-info">
+                        <h3><i class="fas fa-wind"></i> Wind Speed</h3>
+                        <p>Wind speed is the speed of the weather-related air movement from one place to the next. It is measured in kilometers per hour (km/h) or miles per hour (mph).</p>
+                        <ul>
+                            <li><strong>Calm:</strong> Less than 1 km/h</li>
+                            <li><strong>Moderate:</strong> 20-30 km/h</li>
+                            <li><strong>Strong:</strong> Above 50 km/h</li>
+                        </ul>
+                    </div>
+                    <div class="weather-info">
+                        <h3><i class="fas fa-tint"></i> Humidity</h3>
+                        <p>Humidity is the amount of water vapor in the air. Relative humidity is expressed as a percentage of the maximum amount of water vapor the air can hold at a given temperature.</p>
+                        <ul>
+                            <li><strong>Comfortable:</strong> 30-60%</li>
+                            <li><strong>Humid:</strong> Above 70%</li>
+                            <li><strong>Dry:</strong> Below 30%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Digital Dashboard</span>
+            </div>
+            <p class="footer-text">College Project - Interactive Digital Dashboard with Real-time Data Visualization</p>
+            <p class="footer-copyright">© 2025 Digital Dashboard | Created by SK Creations</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

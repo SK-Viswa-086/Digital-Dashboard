@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter | Digital Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Digital Dashboard</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="booking.html" class="nav-link"><i class="fas fa-ticket-alt"></i> Bookings</a></li>
+                <li><a href="rates.html" class="nav-link"><i class="fas fa-coins"></i> Gold & Silver</a></li>
+                <li><a href="currency.html" class="nav-link active"><i class="fas fa-exchange-alt"></i> Currency</a></li>
+                <li><a href="weather.html" class="nav-link"><i class="fas fa-cloud-sun"></i> Weather</a></li>
+            </ul>
+            <div class="nav-user">
+                <i class="fas fa-user-circle"></i>
+                <span>Student</span>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Currency Page Content -->
+    <main class="currency-page">
+        <div class="page-header">
+            <h1>Currency Converter</h1>
+            <p>Convert between world currencies with live exchange rates</p>
+        </div>
+
+        <!-- Currency Converter -->
+        <div class="currency-converter-large animate-slide-up">
+            <h2>Currency Converter</h2>
+            <div class="converter-large">
+                <div class="converter-large-from">
+                    <select id="currencyFrom">
+                        <option value="USD">USD - US Dollar</option>
+                        <option value="INR" selected>INR - Indian Rupee</option>
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="GBP">GBP - British Pound</option>
+                        <option value="JPY">JPY - Japanese Yen</option>
+                        <option value="CAD">CAD - Canadian Dollar</option>
+                        <option value="AUD">AUD - Australian Dollar</option>
+                        <option value="CHF">CHF - Swiss Franc</option>
+                        <option value="CNY">CNY - Chinese Yuan</option>
+                    </select>
+                    <input type="number" id="currencyAmount" value="1000" min="0" step="0.01">
+                </div>
+                <div class="converter-large-swap">
+                    <button id="swapCurrency"><i class="fas fa-exchange-alt"></i></button>
+                </div>
+                <div class="converter-large-to">
+                    <select id="currencyTo">
+                        <option value="USD" selected>USD - US Dollar</option>
+                        <option value="INR">INR - Indian Rupee</option>
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="GBP">GBP - British Pound</option>
+                        <option value="JPY">JPY - Japanese Yen</option>
+                        <option value="CAD">CAD - Canadian Dollar</option>
+                        <option value="AUD">AUD - Australian Dollar</option>
+                        <option value="CHF">CHF - Swiss Franc</option>
+                        <option value="CNY">CNY - Chinese Yuan</option>
+                    </select>
+                    <input type="number" id="convertedAmount" value="12.05" readonly>
+                </div>
+            </div>
+            <div class="converter-large-result">
+                <p id="conversionRate">1 INR = 0.01205 USD</p>
+            </div>
+            <button class="btn-convert" id="convertCurrency">Convert Currency</button>
+        </div>
+
+        <!-- Currency Table -->
+        <div class="currency-table-container animate-slide-up">
+            <h2>Live Exchange Rates</h2>
+            <table class="currency-table">
+                <thead>
+                    <tr>
+                        <th>Currency</th>
+                        <th>Rate (vs USD)</th>
+                        <th>Change (24h)</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Table will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Currency Information -->
+        <div class="widget animate-slide-up" style="margin-top: 30px;">
+            <div class="widget-header">
+                <h2><i class="fas fa-info-circle"></i> Currency Information</h2>
+            </div>
+            <div class="widget-content">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div class="currency-info">
+                        <h3><i class="fas fa-dollar-sign"></i> USD - US Dollar</h3>
+                        <p>The United States dollar is the official currency of the United States and several other countries. It is the world's primary reserve currency.</p>
+                        <ul>
+                            <li><strong>Symbol:</strong> $</li>
+                            <li><strong>Code:</strong> USD</li>
+                            <li><strong>Central Bank:</strong> Federal Reserve</li>
+                        </ul>
+                    </div>
+                    <div class="currency-info">
+                        <h3><i class="fas fa-rupee-sign"></i> INR - Indian Rupee</h3>
+                        <p>The Indian rupee is the official currency of India. The rupee is subdivided into 100 paise, though as of 2023, coins of denomination of 1 rupee are the lowest value in use.</p>
+                        <ul>
+                            <li><strong>Symbol:</strong> ₹</li>
+                            <li><strong>Code:</strong> INR</li>
+                            <li><strong>Central Bank:</strong> Reserve Bank of India</li>
+                        </ul>
+                    </div>
+                    <div class="currency-info">
+                        <h3><i class="fas fa-euro-sign"></i> EUR - Euro</h3>
+                        <p>The euro is the official currency of 20 of the 27 member states of the European Union. This group of states is known as the eurozone or euro area.</p>
+                        <ul>
+                            <li><strong>Symbol:</strong> €</li>
+                            <li><strong>Code:</strong> EUR</li>
+                            <li><strong>Central Bank:</strong> European Central Bank</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Digital Dashboard</span>
+            </div>
+            <p class="footer-text">College Project - Interactive Digital Dashboard with Real-time Data Visualization</p>
+            <p class="footer-copyright">© 2025 Digital Dashboard | Created by SK Creations</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login | Digital Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #121212 0%, #1a1a2e 100%);
+            padding: 20px;
+        }
+        
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+            background: var(--dark-card);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.6s ease-out;
+        }
+        
+        .login-header {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .login-header h1 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .login-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+        
+        .login-form {
+            padding: 40px 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-with-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+        
+        .input-with-icon input {
+            width: 100%;
+            padding: 15px 15px 15px 50px;
+            background: var(--darker-card);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .input-with-icon input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .remember-me input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-color);
+        }
+        
+        .forgot-password {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .forgot-password:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+        
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3);
+        }
+        
+        .btn-login:active {
+            transform: translateY(0);
+        }
+        
+        .login-footer {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .login-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 5px;
+            transition: color 0.3s ease;
+        }
+        
+        .login-footer a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+        
+        .login-error {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 4px solid var(--danger-color);
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .login-error.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .login-success {
+            background: rgba(76, 175, 80, 0.1);
+            border-left: 4px solid var(--success-color);
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .login-success.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .demo-credentials {
+            background: rgba(108, 99, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .demo-credentials h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        .demo-credentials p {
+            margin: 5px 0;
+            color: var(--text-secondary);
+        }
+        
+        @media (max-width: 480px) {
+            .login-container {
+                max-width: 100%;
+            }
+            
+            .login-header {
+                padding: 30px 20px;
+            }
+            
+            .login-form {
+                padding: 30px 20px;
+            }
+            
+            .remember-forgot {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-page">
+        <div class="login-container">
+            <!-- Login Header -->
+            <div class="login-header">
+                <h1>Student Login</h1>
+                <p>Access your Digital Dashboard</p>
+            </div>
+            
+            <!-- Login Form -->
+            <form class="login-form" id="loginForm">
+                <!-- Error Message -->
+                <div class="login-error" id="loginError">
+                    <i class="fas fa-exclamation-circle"></i> Invalid email or password. Please try again.
+                </div>
+                
+                <!-- Success Message -->
+                <div class="login-success" id="loginSuccess">
+                    <i class="fas fa-check-circle"></i> Login successful! Redirecting...
+                </div>
+                
+                <!-- Email Field -->
+                <div class="form-group">
+                    <label for="email">Student Email</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" placeholder="Enter your college email" required>
+                    </div>
+                </div>
+                
+                <!-- Password Field -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                    </div>
+                </div>
+                
+                <!-- Remember Me & Forgot Password -->
+                <div class="remember-forgot">
+                    <div class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <label for="rememberMe">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+                
+                <!-- Login Button -->
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-sign-in-alt"></i> Login to Dashboard
+                </button>
+                
+                <!-- Demo Credentials -->
+                <div class="demo-credentials">
+                    <h3><i class="fas fa-info-circle"></i> Demo Credentials</h3>
+                    <p><strong>Email:</strong> student@college.edu</p>
+                    <p><strong>Password:</strong> password123</p>
+                </div>
+                
+                <!-- Sign Up Link -->
+                <div class="login-footer">
+                    Don't have an account?
+                    <a href="register.html">Register as Student</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Student Login System
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const loginError = document.getElementById('loginError');
+            const loginSuccess = document.getElementById('loginSuccess');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const rememberMe = document.getElementById('rememberMe');
+            
+            // Load saved credentials if "Remember me" was checked
+            if(localStorage.getItem('rememberMe') === 'true') {
+                const savedEmail = localStorage.getItem('studentEmail');
+                const savedPassword = localStorage.getItem('studentPassword');
+                
+                if(savedEmail) emailInput.value = savedEmail;
+                if(savedPassword) passwordInput.value = savedPassword;
+                rememberMe.checked = true;
+            }
+            
+            // Handle form submission
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = emailInput.value.trim();
+                const password = passwordInput.value;
+                
+                // Hide any previous messages
+                loginError.classList.remove('show');
+                loginSuccess.classList.remove('show');
+                
+                // Basic validation
+                if(!email || !password) {
+                    showError('Please fill in all fields');
+                    return;
+                }
+                
+                // Email validation for college email
+                if(!isValidCollegeEmail(email)) {
+                    showError('Please use a valid college email address');
+                    return;
+                }
+                
+                // Simulate API call - In real application, this would be a server call
+                setTimeout(() => {
+                    // Demo credentials check
+                    if((email === 'student@college.edu' && password === 'password123') ||
+                       authenticateUser(email, password)) {
+                        
+                        // Save credentials if "Remember me" is checked
+                        if(rememberMe.checked) {
+                            localStorage.setItem('rememberMe', 'true');
+                            localStorage.setItem('studentEmail', email);
+                            localStorage.setItem('studentPassword', password);
+                        } else {
+                            localStorage.removeItem('rememberMe');
+                            localStorage.removeItem('studentEmail');
+                            localStorage.removeItem('studentPassword');
+                        }
+                        
+                        // Save user session
+                        const studentData = getStudentData(email) || createStudentSession(email);
+                        localStorage.setItem('studentSession', JSON.stringify(studentData));
+                        
+                        // Show success message
+                        loginSuccess.classList.add('show');
+                        
+                        // Redirect to dashboard after 1.5 seconds
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 1500);
+                        
+                    } else {
+                        showError('Invalid email or password. Please try again.');
+                    }
+                }, 800); // Simulate network delay
+            });
+            
+            // Forgot password functionality
+            document.querySelector('.forgot-password').addEventListener('click', function(e) {
+                e.preventDefault();
+                const email = prompt('Please enter your college email to reset password:');
+                
+                if(email && isValidCollegeEmail(email)) {
+                    alert(`Password reset instructions have been sent to ${email}`);
+                } else if(email) {
+                    alert('Please enter a valid college email address.');
+                }
+            });
+            
+            // Helper functions
+            function showError(message) {
+                loginError.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+                loginError.classList.add('show');
+                
+                // Add shake animation to form
+                loginForm.style.animation = 'none';
+                setTimeout(() => {
+                    loginForm.style.animation = 'shake 0.5s';
+                }, 10);
+                
+                // Remove animation after it completes
+                setTimeout(() => {
+                    loginForm.style.animation = '';
+                }, 500);
+            }
+            
+            function isValidCollegeEmail(email) {
+                // Simple college email validation (ends with .edu or contains "college")
+                return email.includes('@') && 
+                      (email.toLowerCase().endsWith('.edu') || 
+                       email.toLowerCase().includes('college') ||
+                       email.toLowerCase().includes('ac.in'));
+            }
+            
+            function authenticateUser(email, password) {
+                // Check if user exists in localStorage
+                const users = JSON.parse(localStorage.getItem('studentUsers')) || [];
+                const user = users.find(u => u.email === email && u.password === password);
+                return user !== undefined;
+            }
+            
+            function getStudentData(email) {
+                const users = JSON.parse(localStorage.getItem('studentUsers')) || [];
+                return users.find(u => u.email === email);
+            }
+            
+            function createStudentSession(email) {
+                // Create a default session for demo users
+                return {
+                    email: email,
+                    name: email.split('@')[0].replace('.', ' '),
+                    college: 'Demo College',
+                    course: 'Computer Science',
+                    year: '3rd Year',
+                    joinDate: new Date().toISOString().split('T')[0],
+                    avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(email.split('@')[0])}&background=6C63FF&color=fff`
+                };
+            }
+            
+            // Add shake animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                    20%, 40%, 60%, 80% { transform: translateX(5px); }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Auto-focus email field
+            emailInput.focus();
+        });
+        // Disable right-click
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    showCustomMessage("Right-click is disabled on this site");
+});
+
+// Optional: Show a custom message
+function showCustomMessage(message) {
+    // Remove existing message if any
+    const existingMsg = document.querySelector('.right-click-message');
+    if (existingMsg) existingMsg.remove();
+    
+    // Create and show new message
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'right-click-message';
+    msgDiv.innerHTML = `
+        <div class="message-box">
+            <i class="fas fa-info-circle"></i>
+            <span>${message}</span>
+        </div>
+    `;
+    document.body.appendChild(msgDiv);
+    
+    // Auto-remove after 2 seconds
+    setTimeout(() => {
+        msgDiv.remove();
+    }, 2000);
+}
+
+// Add this CSS for the message
+const style = document.createElement('style');
+style.textContent = `
+    .right-click-message {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        animation: fadeInOut 2s ease;
+    }
+    
+    .message-box {
+        background: #ff6b6b;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    @keyframes fadeInOut {
+        0% { opacity: 0; transform: translateY(-10px); }
+        20% { opacity: 1; transform: translateY(0); }
+        80% { opacity: 1; transform: translateY(0); }
+        100% { opacity: 0; transform: translateY(-10px); }
+    }
+`;
+document.head.appendChild(style);
+    </script>
+</body>
+</html>

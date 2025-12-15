@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Tickets | Digital Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Digital Dashboard</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="booking.html" class="nav-link active"><i class="fas fa-ticket-alt"></i> Bookings</a></li>
+                <li><a href="rates.html" class="nav-link"><i class="fas fa-coins"></i> Gold & Silver</a></li>
+                <li><a href="currency.html" class="nav-link"><i class="fas fa-exchange-alt"></i> Currency</a></li>
+                <li><a href="weather.html" class="nav-link"><i class="fas fa-cloud-sun"></i> Weather</a></li>
+            </ul>
+            <div class="nav-user">
+                <i class="fas fa-user-circle"></i>
+                <span>Student</span>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Booking Page Content -->
+    <main class="booking-page">
+        <div class="page-header">
+            <h1>Book Tickets</h1>
+            <p>Search and book train, bus, and flight tickets</p>
+        </div>
+
+        <!-- Transport Type Selection -->
+        <div class="transport-type animate-slide-up">
+            <h2>Select Transport Type</h2>
+            <div class="transport-options">
+                <div class="transport-type-option active" data-type="train">
+                    <div class="transport-icon">
+                        <i class="fas fa-train"></i>
+                    </div>
+                    <h3>Train</h3>
+                    <p>Book railway tickets</p>
+                </div>
+                <div class="transport-type-option" data-type="bus">
+                    <div class="transport-icon">
+                        <i class="fas fa-bus"></i>
+                    </div>
+                    <h3>Bus</h3>
+                    <p>Book bus tickets</p>
+                </div>
+                <div class="transport-type-option" data-type="flight">
+                    <div class="transport-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3>Flight</h3>
+                    <p>Book airline tickets</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking Form -->
+        <div class="booking-form-container animate-slide-up">
+            <h2 class="booking-form-title">Train Ticket Booking</h2>
+            <div class="booking-form-expanded">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bookingFrom"><i class="fas fa-map-marker-alt"></i> From</label>
+                        <input type="text" id="bookingFrom" placeholder="Enter departure station">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingTo"><i class="fas fa-map-marker-alt"></i> To</label>
+                        <input type="text" id="bookingTo" placeholder="Enter arrival station">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bookingDate"><i class="fas fa-calendar-alt"></i> Date</label>
+                        <input type="date" id="bookingDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingPassengers"><i class="fas fa-users"></i> Passengers</label>
+                        <select id="bookingPassengers">
+                            <option value="1">1 Passenger</option>
+                            <option value="2">2 Passengers</option>
+                            <option value="3">3 Passengers</option>
+                            <option value="4">4 Passengers</option>
+                            <option value="5">5 Passengers</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn-search">
+                    <i class="fas fa-search"></i> Search Tickets
+                </button>
+            </div>
+        </div>
+
+        <!-- Search Results -->
+        <div class="booking-results animate-slide-up">
+            <div class="results-placeholder">
+                <i class="fas fa-search"></i>
+                <h3>Search for tickets to see results</h3>
+                <p>Enter your journey details and click "Search Tickets"</p>
+            </div>
+        </div>
+
+        <!-- Recent Bookings -->
+        <div class="recent-bookings animate-slide-up">
+            <h2>Recent Bookings</h2>
+            <div class="recent-bookings-list">
+                <div class="recent-booking">
+                    <div class="recent-booking-icon">
+                        <i class="fas fa-train"></i>
+                    </div>
+                    <div class="recent-booking-details">
+                        <h4>New Delhi to Mumbai</h4>
+                        <p>Rajdhani Express • 2 seats • 15 Dec 2023</p>
+                    </div>
+                    <div class="recent-booking-status confirmed">
+                        Confirmed
+                    </div>
+                </div>
+                <div class="recent-booking">
+                    <div class="recent-booking-icon">
+                        <i class="fas fa-bus"></i>
+                    </div>
+                    <div class="recent-booking-details">
+                        <h4>Bangalore to Chennai</h4>
+                        <p>Volvo AC Sleeper • 1 seat • 12 Dec 2023</p>
+                    </div>
+                    <div class="recent-booking-status completed">
+                        Completed
+                    </div>
+                </div>
+                <div class="recent-booking">
+                    <div class="recent-booking-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <div class="recent-booking-details">
+                        <h4>Mumbai to Dubai</h4>
+                        <p>Emirates Flight • 3 seats • 10 Dec 2023</p>
+                    </div>
+                    <div class="recent-booking-status confirmed">
+                        Confirmed
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Digital Dashboard</span>
+            </div>
+            <p class="footer-text">College Project - Interactive Digital Dashboard with Real-time Data Visualization</p>
+            <p class="footer-copyright">© 2025 Digital Dashboard | Created by SK Creations</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile | Digital Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .profile-page {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        .page-header {
+            margin-bottom: 30px;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        .profile-container {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 30px;
+        }
+        
+        .profile-sidebar {
+            background: var(--dark-card);
+            border-radius: 16px;
+            padding: 30px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            overflow: hidden;
+            border: 5px solid var(--dark-card);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .profile-name {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+        
+        .profile-email {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .profile-badge {
+            display: inline-block;
+            background: rgba(108, 99, 255, 0.2);
+            color: var(--primary-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .profile-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .profile-stat {
+            text-align: center;
+            background: var(--darker-card);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .profile-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .profile-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .profile-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .btn-profile-action {
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-edit {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-edit:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-logout {
+            background: rgba(244, 67, 54, 0.2);
+            color: var(--danger-color);
+        }
+        
+        .btn-logout:hover {
+            background: rgba(244, 67, 54, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .profile-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .profile-section {
+            background: var(--dark-card);
+            border-radius: 16px;
+            padding: 30px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .section-header h2 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+        
+        .section-header h2 i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        .btn-edit-section {
+            background: none;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-edit-section:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .info-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+        
+        .info-value {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        
+        .dashboard-access {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .access-card {
+            background: var(--darker-card);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .access-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--primary-color);
+        }
+        
+        .access-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(108, 99, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .access-card h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .access-card p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .recent-activity {
+            list-style: none;
+        }
+        
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1rem;
+            color: white;
+        }
+        
+        .activity-icon.login {
+            background: var(--primary-color);
+        }
+        
+        .activity-icon.booking {
+            background: var(--train-color);
+        }
+        
+        .activity-icon.currency {
+            background: var(--success-color);
+        }
+        
+        .activity-icon.weather {
+            background: var(--info-color);
+        }
+        
+        .activity-details {
+            flex: 1;
+        }
+        
+        .activity-text {
+            margin-bottom: 5px;
+        }
+        
+        .activity-time {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Edit Profile Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal {
+            background: var(--dark-card);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.4s ease;
+        }
+        
+        .modal-header {
+            padding: 25px 30px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+        
+        .btn-close-modal {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .btn-close-modal:hover {
+            color: var(--text-primary);
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .modal-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .modal-form label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .modal-form input,
+        .modal-form select {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--darker-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+        
+        .modal-form input:focus,
+        .modal-form select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .modal-footer {
+            padding: 20px 30px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+        
+        .btn-modal {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-cancel {
+            background: var(--darker-card);
+            color: var(--text-primary);
+        }
+        
+        .btn-cancel:hover {
+            background: var(--border-color);
+        }
+        
+        .btn-save {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-save:hover {
+            background: var(--primary-dark);
+        }
+        
+        @media (max-width: 1024px) {
+            .profile-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-sidebar {
+                position: static;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-access {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .dashboard-access {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Digital Dashboard</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="booking.html" class="nav-link"><i class="fas fa-ticket-alt"></i> Bookings</a></li>
+                <li><a href="rates.html" class="nav-link"><i class="fas fa-coins"></i> Gold & Silver</a></li>
+                <li><a href="currency.html" class="nav-link"><i class="fas fa-exchange-alt"></i> Currency</a></li>
+                <li><a href="weather.html" class="nav-link"><i class="fas fa-cloud-sun"></i> Weather</a></li>
+                <li><a href="profile.html" class="nav-link active"><i class="fas fa-user-graduate"></i> Profile</a></li>
+            </ul>
+            <div class="nav-user" id="navUser">
+                <i class="fas fa-user-circle"></i>
+                <span>Loading...</span>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Page Content -->
+    <main class="profile-page">
+        <div class="page-header">
+            <h1>Student Profile</h1>
+            <p>Manage your account and dashboard preferences</p>
+        </div>
+
+        <div class="profile-container">
+            <!-- Profile Sidebar -->
+            <div class="profile-sidebar animate-slide-up">
+                <div class="profile-header">
+                    <div class="profile-avatar" id="profileAvatar">
+                        <!-- Avatar will be loaded by JavaScript -->
+                    </div>
+                    <h2 class="profile-name" id="profileName">Loading...</h2>
+                    <p class="profile-email" id="profileEmail">Loading...</p>
+                    <span class="profile-badge" id="profileBadge">Verified Student</span>
+                    
+                    <div class="profile-stats">
+                        <div class="profile-stat">
+                            <div class="profile-stat-value" id="bookingsCount">0</div>
+                            <div class="profile-stat-label">Bookings</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="profile-stat-value" id="loginDays">0</div>
+                            <div class="profile-stat-label">Days Active</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="profile-actions">
+                    <button class="btn-profile-action btn-edit" id="btnEditProfile">
+                        <i class="fas fa-edit"></i> Edit Profile
+                    </button>
+                    <button class="btn-profile-action btn-logout" id="btnLogout">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+
+            <!-- Profile Content -->
+            <div class="profile-content">
+                <!-- Personal Information -->
+                <div class="profile-section animate-slide-up">
+                    <div class="section-header">
+                        <h2><i class="fas fa-user"></i> Personal Information</h2>
+                        <button class="btn-edit-section" data-section="personal">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                    <div class="info-grid" id="personalInfo">
+                        <!-- Content loaded by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Academic Information -->
+                <div class="profile-section animate-slide-up">
+                    <div class="section-header">
+                        <h2><i class="fas fa-graduation-cap"></i> Academic Information</h2>
+                        <button class="btn-edit-section" data-section="academic">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                    <div class="info-grid" id="academicInfo">
+                        <!-- Content loaded by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Dashboard Access -->
+                <div class="profile-section animate-slide-up">
+                    <div class="section-header">
+                        <h2><i class="fas fa-tachometer-alt"></i> Dashboard Access</h2>
+                    </div>
+                    <div class="dashboard-access">
+                        <a href="index.html" class="access-card">
+                            <div class="access-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <h4>Main Dashboard</h4>
+                            <p>Overview of all features</p>
+                        </a>
+                        <a href="booking.html" class="access-card">
+                            <div class="access-icon">
+                                <i class="fas fa-ticket-alt"></i>
+                            </div>
+                            <h4>Book Tickets</h4>
+                            <p>Train, bus, flight tickets</p>
+                        </a>
+                        <a href="rates.html" class="access-card">
+                            <div class="access-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4>Market Rates</h4>
+                            <p>Gold & silver prices</p>
+                        </a>
+                        <a href="currency.html" class="access-card">
+                            <div class="access-icon">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <h4>Currency Converter</h4>
+                            <p>Convert currencies</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="profile-section animate-slide-up">
+                    <div class="section-header">
+                        <h2><i class="fas fa-history"></i> Recent Activity</h2>
+                    </div>
+                    <ul class="recent-activity" id="recentActivity">
+                        <!-- Content loaded by JavaScript -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal-overlay" id="editModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Edit Profile</h3>
+                <button class="btn-close-modal" id="btnCloseModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="modal-form" id="editForm">
+                <div class="modal-body">
+                    <!-- Form content loaded by JavaScript -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-modal btn-cancel" id="btnCancelEdit">Cancel</button>
+                    <button type="submit" class="btn-modal btn-save">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Digital Dashboard</span>
+            </div>
+            <p class="footer-text">College Project - Interactive Digital Dashboard with Real-time Data Visualization</p>
+            <p class="footer-copyright">© 2023 Digital Dashboard | Created for Educational Purpose</p>
+        </div>
+    </footer>
+
+    <script>
+        // Student Profile System
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const studentSession = JSON.parse(localStorage.getItem('studentSession'));
+            
+            if(!studentSession) {
+                // Redirect to login if not logged in
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Load student data
+            const student = studentSession;
+            
+            // Update navigation
+            const navUser = document.getElementById('navUser');
+            if(navUser) {
+                navUser.innerHTML = `<i class="fas fa-user-circle"></i><span>${student.fullName || student.email.split('@')[0]}</span>`;
+            }
+            
+            // Update profile sidebar
+            updateProfileSidebar(student);
+            
+            // Update profile sections
+            updatePersonalInfo(student);
+            updateAcademicInfo(student);
+            updateRecentActivity(student);
+            
+            // Set up edit buttons
+            setupEditButtons(student);
+            
+            // Set up logout button
+            document.getElementById('btnLogout').addEventListener('click', function() {
+                if(confirm('Are you sure you want to logout?')) {
+                    localStorage.removeItem('studentSession');
+                    window.location.href = 'login.html';
+                }
+            });
+            
+            // Set up edit profile button
+            document.getElementById('btnEditProfile').addEventListener('click', function() {
+                openEditModal('personal', student);
+            });
+            
+            // Helper functions
+            function updateProfileSidebar(student) {
+                // Update avatar
+                const avatar = document.getElementById('profileAvatar');
+                if(student.avatar) {
+                    if(student.avatar.includes('http')) {
+                        avatar.innerHTML = `<img src="${student.avatar}" alt="${student.fullName}">`;
+                    } else {
+                        avatar.innerHTML = `<i class="fas fa-user-graduate"></i>`;
+                        avatar.style.background = `linear-gradient(135deg, ${student.avatarColor || '#6C63FF'}, ${student.avatarColor2 || '#FF6584'})`;
+                    }
+                }
+                
+                // Update name and email
+                document.getElementById('profileName').textContent = student.fullName || student.email.split('@')[0];
+                document.getElementById('profileEmail').textContent = student.email;
+                
+                // Update stats (mock data for demo)
+                document.getElementById('bookingsCount').textContent = Math.floor(Math.random() * 20) + 1;
+                document.getElementById('loginDays').textContent = Math.floor(Math.random() * 365) + 1;
+                
+                // Update badge based on verification status
+                const badge = document.getElementById('profileBadge');
+                if(student.isVerified) {
+                    badge.textContent = 'Verified Student';
+                    badge.style.background = 'rgba(76, 175, 80, 0.2)';
+                    badge.style.color = '#4CAF50';
+                } else {
+                    badge.textContent = 'Unverified Student';
+                    badge.style.background = 'rgba(255, 152, 0, 0.2)';
+                    badge.style.color = '#FF9800';
+                }
+            }
+            
+            function updatePersonalInfo(student) {
+                const container = document.getElementById('personalInfo');
+                container.innerHTML = `
+                    <div class="info-item">
+                        <span class="info-label">Full Name</span>
+                        <span class="info-value">${student.fullName || 'Not set'}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Email Address</span>
+                        <span class="info-value">${student.email}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Phone Number</span>
+                        <span class="info-value">${student.phone || 'Not set'}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Date of Birth</span>
+                        <span class="info-value">${student.dob || 'Not set'}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Address</span>
+                        <span class="info-value">${student.address || 'Not set'}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Account Created</span>
+                        <span class="info-value">${student.joinDate || 'Not set'}</span>
+                    </div>
+                `;
+            }
+            
+            function updateAcademicInfo(student) {
+                const container = document.getElementById('academicInfo');
+                container.innerHTML = `
+                    <div class="info-item">
+                        <span class="info-label">College Name</span>
+                        <span class="info-value">${student.college || 'Not set'}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Course</span>
+                        <span class="info-value">${student.course || 'Not set'}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Year</span>
+                        <span class="info-value">${student.year || 'Not set'}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Student ID</span>
+                        <span class="info-value">${student.studentId || 'Not set'}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Roll Number</span>
+                        <span class="info-value">${student.rollNumber || 'Not set'}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Department</span>
+                        <span class="info-value">${student.department || student.course || 'Not set'}</span>
+                    </div>
+                `;
+            }
+            
+            function updateRecentActivity(student) {
+                const container = document.getElementById('recentActivity');
+                
+                // Mock activity data
+                const activities = [
+                    { type: 'login', text: 'Logged into dashboard', time: 'Today, 10:30 AM', icon: 'sign-in-alt' },
+                    { type: 'booking', text: 'Booked train ticket to Mumbai', time: 'Yesterday, 2:15 PM', icon: 'train' },
+                    { type: 'currency', text: 'Converted USD to INR', time: '2 days ago', icon: 'exchange-alt' },
+                    { type: 'weather', text: 'Checked weather for London', time: '3 days ago', icon: 'cloud-sun' },
+                    { type: 'login', text: 'Logged into dashboard', time: '1 week ago', icon: 'sign-in-alt' }
+                ];
+                
+                container.innerHTML = activities.map(activity => `
+                    <li class="activity-item">
+                        <div class="activity-icon ${activity.type}">
+                            <i class="fas fa-${activity.icon}"></i>
+                        </div>
+                        <div class="activity-details">
+                            <div class="activity-text">${activity.text}</div>
+                            <div class="activity-time">${activity.time}</div>
+                        </div>
+                    </li>
+                `).join('');
+            }
+            
+            function setupEditButtons(student) {
+                // Section edit buttons
+                document.querySelectorAll('.btn-edit-section').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const section = this.getAttribute('data-section');
+                        openEditModal(section, student);
+                    });
+                });
+            }
+            
+            function openEditModal(section, student) {
+                const modal = document.getElementById('editModal');
+                const modalTitle = document.getElementById('modalTitle');
+                const modalBody = document.querySelector('.modal-body');
+                
+                // Set modal title
+                modalTitle.textContent = section === 'personal' ? 'Edit Personal Information' : 'Edit Academic Information';
+                
+                // Set form content based on section
+                if(section === 'personal') {
+                    modalBody.innerHTML = `
+                        <div class="form-group">
+                            <label for="editFirstName">First Name</label>
+                            <input type="text" id="editFirstName" value="${student.firstName || ''}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editLastName">Last Name</label>
+                            <input type="text" id="editLastName" value="${student.lastName || ''}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editPhone">Phone Number</label>
+                            <input type="tel" id="editPhone" value="${student.phone || ''}">
+                        </div>
+                        <div class="form-group">
+                            <label for="editDob">Date of Birth</label>
+                            <input type="date" id="editDob" value="${student.dob || ''}">
+                        </div>
+                        <div class="form-group">
+                            <label for="editAddress">Address</label>
+                            <input type="text" id="editAddress" value="${student.address || ''}">
+                        </div>
+                    `;
+                } else if(section === 'academic') {
+                    modalBody.innerHTML = `
+                        <div class="form-group">
+                            <label for="editCollege">College Name</label>
+                            <input type="text" id="editCollege" value="${student.college || ''}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCourse">Course</label>
+                            <select id="editCourse" required>
+                                <option value="">Select Course</option>
+                                <option value="Computer Science" ${student.course === 'Computer Science' ? 'selected' : ''}>Computer Science</option>
+                                <option value="Information Technology" ${student.course === 'Information Technology' ? 'selected' : ''}>Information Technology</option>
+                                <option value="Electronics" ${student.course === 'Electronics' ? 'selected' : ''}>Electronics</option>
+                                <option value="Mechanical" ${student.course === 'Mechanical' ? 'selected' : ''}>Mechanical</option>
+                                <option value="Civil" ${student.course === 'Civil' ? 'selected' : ''}>Civil</option>
+                                <option value="Electrical" ${student.course === 'Electrical' ? 'selected' : ''}>Electrical</option>
+                                <option value="Business Administration" ${student.course === 'Business Administration' ? 'selected' : ''}>Business Administration</option>
+                                <option value="Other" ${!['Computer Science', 'Information Technology', 'Electronics', 'Mechanical', 'Civil', 'Electrical', 'Business Administration'].includes(student.course) ? 'selected' : ''}>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editYear">Year</label>
+                            <select id="editYear" required>
+                                <option value="">Select Year</option>
+                                <option value="1st Year" ${student.year === '1st Year' ? 'selected' : ''}>1st Year</option>
+                                <option value="2nd Year" ${student.year === '2nd Year' ? 'selected' : ''}>2nd Year</option>
+                                <option value="3rd Year" ${student.year === '3rd Year' ? 'selected' : ''}>3rd Year</option>
+                                <option value="4th Year" ${student.year === '4th Year' ? 'selected' : ''}>4th Year</option>
+                                <option value="5th Year" ${student.year === '5th Year' ? 'selected' : ''}>5th Year</option>
+                                <option value="Post Graduate" ${student.year === 'Post Graduate' ? 'selected' : ''}>Post Graduate</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editStudentId">Student ID</label>
+                            <input type="text" id="editStudentId" value="${student.studentId || ''}">
+                        </div>
+                        <div class="form-group">
+                            <label for="editRollNumber">Roll Number</label>
+                            <input type="text" id="editRollNumber" value="${student.rollNumber || ''}">
+                        </div>
+                    `;
+                }
+                
+                // Show modal
+                modal.classList.add('active');
+                
+                // Set up form submission
+                const editForm = document.getElementById('editForm');
+                editForm.onsubmit = function(e) {
+                    e.preventDefault();
+                    saveChanges(section, student);
+                };
+                
+                // Set up close buttons
+                document.getElementById('btnCloseModal').onclick = closeModal;
+                document.getElementById('btnCancelEdit').onclick = closeModal;
+                
+                // Close modal when clicking outside
+                modal.onclick = function(e) {
+                    if(e.target === modal) closeModal();
+                };
+            }
+            
+            function saveChanges(section, student) {
+                if(section === 'personal') {
+                    // Update personal info
+                    student.firstName = document.getElementById('editFirstName').value;
+                    student.lastName = document.getElementById('editLastName').value;
+                    student.fullName = `${student.firstName} ${student.lastName}`;
+                    student.phone = document.getElementById('editPhone').value;
+                    student.dob = document.getElementById('editDob').value;
+                    student.address = document.getElementById('editAddress').value;
+                    
+                    // Update avatar with initials
+                    const initials = `${student.firstName.charAt(0)}${student.lastName.charAt(0)}`.toUpperCase();
+                    student.avatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(student.fullName)}&background=6C63FF&color=fff`;
+                } else if(section === 'academic') {
+                    // Update academic info
+                    student.college = document.getElementById('editCollege').value;
+                    student.course = document.getElementById('editCourse').value;
+                    student.year = document.getElementById('editYear').value;
+                    student.studentId = document.getElementById('editStudentId').value;
+                    student.rollNumber = document.getElementById('editRollNumber').value;
+                }
+                
+                // Save updated student data
+                localStorage.setItem('studentSession', JSON.stringify(student));
+                
+                // Update all profile sections
+                updateProfileSidebar(student);
+                updatePersonalInfo(student);
+                updateAcademicInfo(student);
+                
+                // Close modal
+                closeModal();
+                
+                // Show success message
+                alert('Profile updated successfully!');
+            }
+            
+            function closeModal() {
+                document.getElementById('editModal').classList.remove('active');
+            }
+            
+            // Initialize animations
+            const animatedElements = document.querySelectorAll('.animate-slide-up');
+            animatedElements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+        // Disable right-click
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    showCustomMessage("Right-click is disabled on this site");
+});
+
+// Optional: Show a custom message
+function showCustomMessage(message) {
+    // Remove existing message if any
+    const existingMsg = document.querySelector('.right-click-message');
+    if (existingMsg) existingMsg.remove();
+    
+    // Create and show new message
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'right-click-message';
+    msgDiv.innerHTML = `
+        <div class="message-box">
+            <i class="fas fa-info-circle"></i>
+            <span>${message}</span>
+        </div>
+    `;
+    document.body.appendChild(msgDiv);
+    
+    // Auto-remove after 2 seconds
+    setTimeout(() => {
+        msgDiv.remove();
+    }, 2000);
+}
+
+// Add this CSS for the message
+const style = document.createElement('style');
+style.textContent = `
+    .right-click-message {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        animation: fadeInOut 2s ease;
+    }
+    
+    .message-box {
+        background: #ff6b6b;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    @keyframes fadeInOut {
+        0% { opacity: 0; transform: translateY(-10px); }
+        20% { opacity: 1; transform: translateY(0); }
+        80% { opacity: 1; transform: translateY(0); }
+        100% { opacity: 0; transform: translateY(-10px); }
+    }
+`;
+document.head.appendChild(style);
+    </script>
+</body>
+</html>

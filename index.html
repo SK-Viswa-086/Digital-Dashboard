@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Dashboard | College Project</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Digital Dashboard</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="booking.html" class="nav-link"><i class="fas fa-ticket-alt"></i> Bookings</a></li>
+                <li><a href="rates.html" class="nav-link"><i class="fas fa-coins"></i> Gold & Silver</a></li>
+                <li><a href="currency.html" class="nav-link"><i class="fas fa-exchange-alt"></i> Currency</a></li>
+                <li><a href="weather.html" class="nav-link"><i class="fas fa-cloud-sun"></i> Weather</a></li>
+            </ul>
+            <!-- Replace the existing nav-user div with this: -->
+            <div class="nav-user" id="navUser">
+                <i class="fas fa-user-circle"></i>
+                <a href="profile.html" id="navUser">Login</a>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="dashboard">
+        <!-- Header with time and greeting -->
+        <div class="dashboard-header">
+            <div class="greeting">
+                <h1>Welcome to Digital Dashboard</h1>
+                <p id="datetime">Monday, December 15, 2023 | 10:30 AM</p>
+            </div>
+            <div class="quick-stats">
+                <div class="stat-card">
+                    <i class="fas fa-train"></i>
+                    <div>
+                        <h3>Transport</h3>
+                        <p>Book Tickets</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-chart-line"></i>
+                    <div>
+                        <h3>Market</h3>
+                        <p>Live Rates</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-globe-americas"></i>
+                    <div>
+                        <h3>Global</h3>
+                        <p>Currency & Weather</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Widgets -->
+        <div class="dashboard-widgets">
+            <!-- Transport Widget -->
+            <div class="widget transport-widget animate-slide-up">
+                <div class="widget-header">
+                    <h2><i class="fas fa-subway"></i> Quick Transport Booking</h2>
+                    <a href="booking.html" class="widget-link">View All <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="widget-content">
+                    <div class="transport-options">
+                        <div class="transport-option active" data-type="train">
+                            <i class="fas fa-train"></i>
+                            <span>Train</span>
+                        </div>
+                        <div class="transport-option" data-type="bus">
+                            <i class="fas fa-bus"></i>
+                            <span>Bus</span>
+                        </div>
+                        <div class="transport-option" data-type="flight">
+                            <i class="fas fa-plane"></i>
+                            <span>Flight</span>
+                        </div>
+                    </div>
+                    <div class="booking-form">
+                        <div class="form-group">
+                            <label for="from">From</label>
+                            <input type="text" id="from" placeholder="Enter city">
+                        </div>
+                        <div class="form-group">
+                            <label for="to">To</label>
+                            <input type="text" id="to" placeholder="Enter city">
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date">
+                        </div>
+                        <button class="btn-book">Search <i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market Rates Widget -->
+            <div class="widget rates-widget animate-slide-up">
+                <div class="widget-header">
+                    <h2><i class="fas fa-chart-line"></i> Gold & Silver Rates</h2>
+                    <a href="rates.html" class="widget-link">View Details <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="widget-content">
+                    <div class="rate-display">
+                        <div class="rate-item">
+                            <div class="rate-icon gold">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                            <div class="rate-info">
+                                <h3>Gold (24K)</h3>
+                                <p class="rate-value">₹6,250 / gram</p>
+                                <p class="rate-change positive">+0.8%</p>
+                            </div>
+                        </div>
+                        <div class="rate-item">
+                            <div class="rate-icon silver">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                            <div class="rate-info">
+                                <h3>Silver</h3>
+                                <p class="rate-value">₹78.5 / gram</p>
+                                <p class="rate-change negative">-0.3%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rate-chart">
+                        <canvas id="ratesChart"></canvas>
+                    </div>
+                    <p class="update-info">Next update in: <span id="updateCountdown">11:45:32</span></p>
+                </div>
+            </div>
+
+            <!-- Currency Widget -->
+            <div class="widget currency-widget animate-slide-up">
+                <div class="widget-header">
+                    <h2><i class="fas fa-money-bill-wave"></i> Currency Converter</h2>
+                    <a href="currency.html" class="widget-link">More Currencies <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="widget-content">
+                    <div class="converter">
+                        <div class="converter-from">
+                            <select id="fromCurrency">
+                                <option value="USD">USD - US Dollar</option>
+                                <option value="INR" selected>INR - Indian Rupee</option>
+                                <option value="EUR">EUR - Euro</option>
+                                <option value="GBP">GBP - British Pound</option>
+                                <option value="JPY">JPY - Japanese Yen</option>
+                            </select>
+                            <input type="number" id="fromAmount" value="1000">
+                        </div>
+                        <div class="converter-swap">
+                            <button id="swapCurrencies"><i class="fas fa-exchange-alt"></i></button>
+                        </div>
+                        <div class="converter-to">
+                            <select id="toCurrency">
+                                <option value="USD" selected>USD - US Dollar</option>
+                                <option value="INR">INR - Indian Rupee</option>
+                                <option value="EUR">EUR - Euro</option>
+                                <option value="GBP">GBP - British Pound</option>
+                                <option value="JPY">JPY - Japanese Yen</option>
+                            </select>
+                            <input type="number" id="toAmount" value="12.05" readonly>
+                        </div>
+                    </div>
+                    <div class="converter-result">
+                        <p>1 INR = 0.01205 USD</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weather Widget -->
+            <div class="widget weather-widget animate-slide-up">
+                <div class="widget-header">
+                    <h2><i class="fas fa-cloud-sun"></i> Weather Forecast</h2>
+                    <a href="weather.html" class="widget-link">Full Forecast <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="widget-content">
+                    <div class="weather-current">
+                        <div class="weather-location">
+                            <h3>New Delhi, India</h3>
+                            <p>Partly Cloudy</p>
+                        </div>
+                        <div class="weather-temp">
+                            <h1>28°C</h1>
+                            <p>Feels like 30°C</p>
+                        </div>
+                        <div class="weather-icon">
+                            <i class="fas fa-cloud-sun"></i>
+                        </div>
+                    </div>
+                    <div class="weather-details">
+                        <div class="weather-detail">
+                            <i class="fas fa-wind"></i>
+                            <span>Wind: 12 km/h</span>
+                        </div>
+                        <div class="weather-detail">
+                            <i class="fas fa-tint"></i>
+                            <span>Humidity: 45%</span>
+                        </div>
+                        <div class="weather-detail">
+                            <i class="fas fa-temperature-high"></i>
+                            <span>High: 32°C</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity Widget -->
+            <div class="widget activity-widget animate-slide-up">
+                <div class="widget-header">
+                    <h2><i class="fas fa-history"></i> Recent Activity</h2>
+                </div>
+                <div class="widget-content">
+                    <ul class="activity-list">
+                        <li>
+                            <i class="fas fa-train activity-icon train"></i>
+                            <div>
+                                <p>Train ticket booked to Mumbai</p>
+                                <span class="activity-time">2 hours ago</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-coins activity-icon gold"></i>
+                            <div>
+                                <p>Checked gold rates</p>
+                                <span class="activity-time">5 hours ago</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-exchange-alt activity-icon currency"></i>
+                            <div>
+                                <p>Converted USD to EUR</p>
+                                <span class="activity-time">Yesterday</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-cloud-sun activity-icon weather"></i>
+                            <div>
+                                <p>Viewed weather for London</p>
+                                <span class="activity-time">2 days ago</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Quick Links Widget -->
+            <div class="widget links-widget animate-slide-up">
+                <div class="widget-header">
+                    <h2><i class="fas fa-external-link-alt"></i> Quick Links</h2>
+                </div>
+                <div class="widget-content">
+                    <div class="link-cards">
+                        <a href="booking.html" class="link-card">
+                            <i class="fas fa-train"></i>
+                            <span>Book Train</span>
+                        </a>
+                        <a href="booking.html" class="link-card">
+                            <i class="fas fa-bus"></i>
+                            <span>Book Bus</span>
+                        </a>
+                        <a href="booking.html" class="link-card">
+                            <i class="fas fa-plane"></i>
+                            <span>Book Flight</span>
+                        </a>
+                        <a href="rates.html" class="link-card">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Market Trends</span>
+                        </a>
+                        <a href="currency.html" class="link-card">
+                            <i class="fas fa-globe"></i>
+                            <span>Global Currencies</span>
+                        </a>
+                        <a href="weather.html" class="link-card">
+                            <i class="fas fa-umbrella"></i>
+                            <span>Weather Alerts</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Digital Dashboard</span>
+            </div>
+            <p class="footer-text">College Project - Interactive Digital Dashboard with Real-time Data Visualization</p>
+            <p class="footer-copyright">© 2025 Digital Dashboard | Created by SK Creations</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize chart for the dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gold/Silver Rates Chart
+            const ctx = document.getElementById('ratesChart').getContext('2d');
+            const ratesChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [
+                        {
+                            label: 'Gold (24K)',
+                            data: [6150, 6180, 6220, 6230, 6250, 6240, 6250],
+                            borderColor: '#FFD700',
+                            backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                            tension: 0.4,
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Silver',
+                            data: [76.5, 77.0, 77.8, 78.2, 78.5, 78.3, 78.5],
+                            borderColor: '#C0C0C0',
+                            backgroundColor: 'rgba(192, 192, 192, 0.1)',
+                            tension: 0.4,
+                            borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e0e0e0'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#b0b0b0'
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#b0b0b0',
+                                callback: function(value) {
+                                    return '₹' + value;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Transport option switching
+            const transportOptions = document.querySelectorAll('.transport-option');
+            transportOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    transportOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Currency converter functionality
+            const fromCurrency = document.getElementById('fromCurrency');
+            const toCurrency = document.getElementById('toCurrency');
+            const fromAmount = document.getElementById('fromAmount');
+            const toAmount = document.getElementById('toAmount');
+            const swapBtn = document.getElementById('swapCurrencies');
+            
+            // Mock conversion rates
+            const exchangeRates = {
+                'INR': { 'USD': 0.01205, 'EUR': 0.01105, 'GBP': 0.00955, 'JPY': 1.76, 'INR': 1 },
+                'USD': { 'INR': 83.0, 'EUR': 0.92, 'GBP': 0.79, 'JPY': 146.0, 'USD': 1 },
+                'EUR': { 'INR': 90.5, 'USD': 1.09, 'GBP': 0.86, 'JPY': 159.0, 'EUR': 1 },
+                'GBP': { 'INR': 104.7, 'USD': 1.27, 'EUR': 1.16, 'JPY': 185.0, 'GBP': 1 },
+                'JPY': { 'INR': 0.57, 'USD': 0.0068, 'EUR': 0.0063, 'GBP': 0.0054, 'JPY': 1 }
+            };
+            
+            function convertCurrency() {
+                const from = fromCurrency.value;
+                const to = toCurrency.value;
+                const amount = parseFloat(fromAmount.value) || 0;
+                
+                if (from === to) {
+                    toAmount.value = amount.toFixed(2);
+                    updateConversionText(amount, from, to);
+                    return;
+                }
+                
+                const rate = exchangeRates[from][to];
+                const result = amount * rate;
+                
+                toAmount.value = result.toFixed(2);
+                updateConversionText(amount, from, to);
+            }
+            
+            function updateConversionText(amount, from, to) {
+                const rate = exchangeRates[from][to];
+                const converterResult = document.querySelector('.converter-result p');
+                converterResult.textContent = `1 ${from} = ${rate.toFixed(5)} ${to}`;
+            }
+            
+            fromCurrency.addEventListener('change', convertCurrency);
+            toCurrency.addEventListener('change', convertCurrency);
+            fromAmount.addEventListener('input', convertCurrency);
+            
+            swapBtn.addEventListener('click', function() {
+                const tempCurrency = fromCurrency.value;
+                fromCurrency.value = toCurrency.value;
+                toCurrency.value = tempCurrency;
+                
+                convertCurrency();
+            });
+            
+            // Initialize conversion on page load
+            convertCurrency();
+            
+            // Update time and countdown
+            function updateDateTime() {
+                const now = new Date();
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                const dateStr = now.toLocaleDateString('en-US', options);
+                const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+                document.getElementById('datetime').textContent = `${dateStr} | ${timeStr}`;
+                
+                // Update countdown for rates update (every 12 hours)
+                const nextUpdate = new Date(now);
+                if (now.getHours() < 12) {
+                    nextUpdate.setHours(12, 0, 0, 0);
+                } else {
+                    nextUpdate.setDate(nextUpdate.getDate() + 1);
+                    nextUpdate.setHours(0, 0, 0, 0);
+                }
+                
+                const diff = nextUpdate - now;
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('updateCountdown').textContent = 
+                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+            
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+            
+            // Initialize date input with tomorrow's date
+            const dateInput = document.getElementById('date');
+            if (dateInput) {
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                dateInput.min = new Date().toISOString().split('T')[0];
+                dateInput.value = tomorrow.toISOString().split('T')[0];
+            }
+            
+            // Search button functionality
+            const searchBtn = document.querySelector('.btn-book');
+            if (searchBtn) {
+                searchBtn.addEventListener('click', function() {
+                    const from = document.getElementById('from').value;
+                    const to = document.getElementById('to').value;
+                    const date = document.getElementById('date').value;
+                    
+                    if (from && to && date) {
+                        window.location.href = `booking.html?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}&date=${date}`;
+                    } else {
+                        alert('Please fill in all fields');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
